@@ -23,3 +23,9 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+población
+crecimiento-poblacional
+sexo-de-la-población
+pirámide-poblacional
+bootstrap-alert
+custom-psragraphs

@@ -15,46 +15,42 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# About
+# POBLACIÓN
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+<div class="alert alert-info">
+* Población total: 849,053 habitantes
+* Población urbana: 803,397 habitantes
+* Población rural: 45,656 habitantes
+* Población femenina 441,924 (52%)
+* Población masculina 407,129 (48%)
+* 92 hombres por cada 100 mujeres
+* Grueso de la población: jóvenes y adultos jóvenes (15 a 34 años) con el 33.53%
+</div>
 
-## Usage 
+La población, entendida como la asociación de personas que desenvuelven su vida dentro de una comunidad identificada con un territorio y sus leyes sociales, cumple con la condición de ser la productora y consumidora de los bienes y servicios que se producen en la misma y otras sociedades, siendo así objeto y sujeto del desarrollo.
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+La población debe ser vista como el principio y fin de las acciones del Estado y debe ser considerada de manera explícita en los planes de desarrollo municipal, pues el mejoramiento de su calidad de vida es la misión principal de los municipios (Madiú, 2019).
 
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+Los datos de población dan cuenta de la estructura y la dinámica de la población. La estructura da cuenta de la distribución o composición de la población según diferentes rasgos tales como la edad, el sexo, el estado civil, lugar en la actividad económica, la localización espacial, entre otros, mientras que la dinámica expresa los cambios que se producen a lo largo del tiempo de variables demográficas básicas, como fecundidad, mortalidad, migraciones, y sus consecuencias sobre la magnitud y estructura de la misma (Araujo, 2017).
 
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+En la planificación de equipamientos y servicios públicos se ha hecho imprescindible el análisis demográfico y su aplicación ya que resulta lógico que la dotación y la localización de los equipamientos se plantee en directa relación con el volumen de población, la estructura de edades, sexo, los cambios temporales en estas variables, así como su distribución territorial (Burriel, 2003).
 
-## Render book
+Por lo tanto, los análisis demográficos deben de servir a la planificación territorial para conocer mejor los problemas de la población y el lugar donde estos se desarrollan.
 
-You can render the HTML version of this example book without changing anything:
+En cuanto al comportamiento poblacional del municipio de Morelia, entre 1970 y 2020, la población municipal de Morelia pasó de 218,083 a 849,053 habitantes, mostrando a lo largo de este periodo un constante incremento, aumentando casi tres veces el tamaño de su población en 50 años convirtiendo al municipio en la zona urbana más importante de Michoacán.
 
-1. Find the **Build** pane in the RStudio IDE, and
+## Crecimiento Poblacional 
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+Entre 1970 y 2020, de acuerdo con estimaciones propias, la población municipal de Morelia pasó de 218,083 a 849,053 habitantes. 
 
-Or build the book from the R console:
+## Sexo de la población
 
-```{r, eval=FALSE}
-bookdown::render_book()
-```
+Del total de la población 52% son mujeres y 48% son hombres.
 
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+## Pirámide poblacional
 
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
+El grupo de edad con mayor número de personas es el que se encuentra en la edad de 20 – 24 años con un total de 76, 838 personas que es el 9% del total de la población. La población de la tercera edad es la de menor proporción en la población moreliana.
 
 ```{r eval=FALSE}
 bookdown::serve_book()
-```
-
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
 ```
