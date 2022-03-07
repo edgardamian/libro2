@@ -15,6 +15,39 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
+  ```{r setup, include=FALSE}
+
+library(sf)
+library(tidyverse)
+library(openxlsx)
+library(units)
+library(RColorBrewer)
+library(ggrepel)
+library(ggforce)
+library(ggalt)
+library(ggpol)
+library(scales)
+
+options(scipen = 100)
+
+temaimplan <- function(posicion = 'none', ...){
+  theme_minimal(base_size = 15) +
+    theme(legend.position = posicion, 
+          axis.title = element_text(face = 'bold'),
+          axis.text = element_text(face = 'bold'))
+}
+
+setwd("C:/Users/Edgar/Documents/IMPLAN/reportes_interactivos/p3/datos")
+dir()
+dat20<-read.xlsx("ITER_16XLSX20.xlsx")
+
+df20<-dat20 %>% 
+  filter(str_detect(NOM_MUN, 'Morelia|Lázaro Cárdenas|Uruapan')) %>% 
+  filter(NOM_LOC=="Total del Municipio") %>% 
+  mutate_at(vars(c(POBTOT:TAMLOC)), ~ str_replace(.,"//*", "NA")) %>% 
+  mutate_at(vars(c(POBTOT:TAMLOC)),funs(as.numeric))
+
+```
 # POBLACIÓN
 
 <div class="alert alert-info">
@@ -43,14 +76,64 @@ En cuanto al comportamiento poblacional del municipio de Morelia, entre 1970 y 2
 
 Entre 1970 y 2020, de acuerdo con estimaciones propias, la población municipal de Morelia pasó de 218,083 a 849,053 habitantes. 
 
+```{r Crecimiento Poblacional, echo=FALSE}
+setwd("C:/Users/Edgar/Documents/IMPLAN/reportes_interactivos/p3/datos")
+
+datos<-read.xlsx("mor_uru_lzc.xlsx")
+
+datos$Municipio <- factor(datos$Municipio, levels = c("Morelia", "Uruapan", "Lázaro Cárdenas"))
+
+ggplot(datos,aes(AÑO, Poblacion.total, color = Municipio)) +
+  geom_line(size = 2) + 
+  geom_point(size = 3) +
+  scale_y_continuous(labels = comma, limits = c(0, 1000000), breaks = seq(0, 1000000, 100000)) +
+  scale_x_continuous(breaks = seq(1920, 2020, 5), labels =  seq(1920, 2020, 5)) +
+  temaimplan('right') +
+  scale_color_manual(values = c("#FF6C32","#FFC000","#AFABAB")) +
+  labs(x = 'Año', y = 'Población total', color = NULL)+
+  theme(legend.position="bottom")
+
+
+ggsave('C:/Users/Edgar/Documents/IMPLAN/reportes_interactivos/p3/graficos/1.crecimiento.poblacional.png',
+       width = 20, height = 12, dpi = 200, units = "cm")
+```
+
+
 ## Sexo de la población
 
 Del total de la población 52% son mujeres y 48% son hombres.
+
+```{r Sexo de la población, echo=FALSE}
+
+dfg<-df20 %>% 
+    select(NOM_MUN, POBMAS, POBFEM) %>% 
+    filter(NOM_MUN=="Morelia") %>% 
+    pivot_longer(c(POBMAS, POBFEM), names_to = "variable") %>% 
+    mutate(variable = str_replace(variable,"POBMAS","Hombres")) %>% 
+    mutate(variable = str_replace(variable,"POBFEM","Mujeres")) %>%
+    mutate(porcentaje = round(value*100/sum(value),digits = 1)) %>% 
+    mutate(csum = rev(cumsum(rev(value))), 
+         pos = value/2 + lead(csum, 1),
+         pos = if_else(is.na(pos), value/2, pos))
+
+
+ggplot(dfg, aes(x = "", y = porcentaje, fill = variable)) +
+  geom_col(color = "black") +
+  geom_label(aes(label =  paste0(variable,"\n",porcentaje, "%")), color =  "black",size = 8,
+             position = position_stack(vjust = 0.5),
+             show.legend = FALSE) +
+  scale_fill_manual(values = c("#FF6C32","#FFC000")) +
+  coord_polar(theta = "y") + 
+  theme_void()+
+  theme(legend.position = "none")
+
+ggsave('C:/Users/Edgar/Documents/IMPLAN/reportes_interactivos/p3/graficos/2.Sexo de la población.png',
+       width = 13, height = 13, dpi = 200, units = "cm")
+```
+
+
 
 ## Pirámide poblacional
 
 El grupo de edad con mayor número de personas es el que se encuentra en la edad de 20 – 24 años con un total de 76, 838 personas que es el 9% del total de la población. La población de la tercera edad es la de menor proporción en la población moreliana.
 
-```{r eval=FALSE}
-bookdown::serve_book()
-```
